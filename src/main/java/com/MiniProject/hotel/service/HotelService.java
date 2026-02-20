@@ -23,9 +23,8 @@ public class HotelService {
         System.out.println(hoteldetails);
         Hotel hotel = new Hotel();
         hotel.setName(hoteldetails.getName());
-        hotel.setImageURL(hoteldetails.getImageURL());
-        hotel.setRating(hoteldetails.getRating());
-
+        hotel.setDescription(hoteldetails.getDescription());
+        hotel.setEmail(hoteldetails.getEmail());
         hotelRepo.save(hotel);
         return "New Hotel Created";
     }
@@ -37,11 +36,12 @@ public class HotelService {
 
         for(Hotel hotel : hotelList)
         {
-            Hoteldetails hoteldetails1 = new Hoteldetails();
-            hoteldetails1.setName(hotel.getName());
-            hoteldetails1.setImageURL(hotel.getImageURL());
-            hoteldetails1.setRating(hotel.getRating());
-            hoteldetails.add(hoteldetails1);
+            Hoteldetails dto = new Hoteldetails();
+            dto.setName(hotel.getName());
+            dto.setDescription(hotel.getDescription());
+            dto.setEmail(hotel.getEmail());
+            dto.setCreatedAt(hotel.getCreatedAt());
+            hoteldetails.add(dto);
         }
         return hoteldetails;
     }

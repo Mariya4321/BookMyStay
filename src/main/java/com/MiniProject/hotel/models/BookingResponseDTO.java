@@ -3,6 +3,7 @@ package com.MiniProject.hotel.models;
 import com.MiniProject.hotel.entities.Room;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -11,7 +12,7 @@ public class BookingResponseDTO {
     private Integer bookingId;
 
     private Integer roomId;
-    private Room roomType;
+    private String roomType;
     private Float roomPrice;
 
     private Integer userId;
@@ -20,7 +21,7 @@ public class BookingResponseDTO {
     private LocalDate checkIn;
     private LocalDate checkOut;
 
-    private Float totalPrice;
+    private BigDecimal totalPrice;
     private String status;
 
     private LocalDateTime createdAt;

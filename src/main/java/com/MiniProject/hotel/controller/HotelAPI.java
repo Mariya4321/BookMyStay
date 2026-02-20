@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/hotel")
 public class HotelAPI {
 
-    private final HotelService hotelService;
+    private final HotelService hotelService;    // dependency injection
     public HotelAPI(HotelService hotelService)
     {
         this.hotelService=hotelService;

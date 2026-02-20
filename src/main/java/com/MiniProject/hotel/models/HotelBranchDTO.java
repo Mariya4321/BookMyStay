@@ -2,6 +2,7 @@ package com.MiniProject.hotel.models;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -11,6 +12,7 @@ public class HotelBranchDTO {
     private String address;
     private String p_no;
     private String email;
-    private Integer rating;
-    private List<RoomDTO> room;
+    private String imageUrl;
+    private BigDecimal rating;
+    private Integer hotelId;
 }

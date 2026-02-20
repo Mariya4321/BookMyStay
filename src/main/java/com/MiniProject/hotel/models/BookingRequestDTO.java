@@ -9,7 +9,6 @@ public class BookingRequestDTO {
 
     private Integer roomId;
     private Integer userId;
-
     private LocalDate checkIn;
     private LocalDate checkOut;
 }

@@ -4,6 +4,7 @@ import com.MiniProject.hotel.enums.BookingStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -15,15 +16,15 @@ public class Booking {
     @SequenceGenerator(name = "booking_id_seq", sequenceName = "seq_id_booking", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booking_id_seq")
     private Integer id;
-    @Column(name = "check_in")
+    @Column(name = "check_in", nullable = false)
     private LocalDate checkIn;
-    @Column(name = "check_out")
+    @Column(name = "check_out", nullable = false)
     private LocalDate checkOut;
-    @Column(name = "total_price")
-    private Float totalPrice;
+    @Column(name = "total_price", nullable = false)
+    private BigDecimal totalPrice;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
     private BookingStatus status;
 
     @Column(name = "create_at", nullable = false, updatable = false)
@@ -34,10 +35,10 @@ public class Booking {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "room_id", referencedColumnName = "id")
+    @JoinColumn(name = "room_id", referencedColumnName = "id", nullable = false)
     private Room room;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
 }

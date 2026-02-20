@@ -12,18 +12,18 @@ public class User {
     @SequenceGenerator(name = "user_id_seq", sequenceName = "seq_id_user", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_seq")
     private Integer id;
-    @Column(name = "fname")
+    @Column(name = "fname", nullable = false)
     private String fname;
-    @Column(name = "lname")
+    @Column(name = "lname", nullable = false)
     private String lname;
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "role")
+    @Column(name = "role", nullable = false)
     private Role role;
 }

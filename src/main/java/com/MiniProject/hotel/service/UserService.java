@@ -27,23 +27,42 @@ public class UserService {
         user.setEmail(userDTO.getEmail());
         user.setPassword(userDTO.getPassword());
         user.setPhoneNumber(userDTO.getPhoneNumber());
-        user.setRole(Role.CUSTOMER);
+
+        if(userDTO.getRole() != null){
+            user.setRole(userDTO.getRole());
+        }
+        else{
+            user.setRole(Role.CUSTOMER); // default role
+        }
+
         userRepo.save(user);
         return "User Registered Successfully";
     }
 
-    public String createAdmin(UserDTO userDTO)
-    {
-        System.out.println(userDTO);
-        User user = new User();
-        user.setFname(userDTO.getFname());
-        user.setLname(userDTO.getLname());
-        user.setEmail(userDTO.getEmail());
-        user.setPassword(userDTO.getPassword());
-        user.setPhoneNumber(userDTO.getPhoneNumber());
-        user.setRole(Role.ADMIN);
-        userRepo.save(user);
-        return "Admin Created Successfully";
+    public UserDTO login(UserDTO userDTO) {
+
+        User user = userRepo.findByEmail(userDTO.getEmail());
+
+        if(user == null){
+            throw new RuntimeException("User not found");
+        }
+
+        if(!user.getPassword().equals(userDTO.getPassword())){
+            throw new RuntimeException("Invalid password");
+        }
+
+        UserDTO dto = new UserDTO();
+
+        dto.setId(user.getId());
+        dto.setFname(user.getFname());
+        dto.setLname(user.getLname());
+        dto.setEmail(user.getEmail());
+        dto.setPhoneNumber(user.getPhoneNumber());
+
+        // ⭐ VERY IMPORTANT
+        dto.setRole(user.getRole());
+
+        return dto;
     }
 
     public List<UserDTO> getUser()

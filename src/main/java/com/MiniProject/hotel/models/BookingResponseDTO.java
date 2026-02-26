@@ -23,6 +23,4 @@ public class BookingResponseDTO {
 
     private BigDecimal totalPrice;
     private String status;
-
-    private LocalDateTime createdAt;
 }

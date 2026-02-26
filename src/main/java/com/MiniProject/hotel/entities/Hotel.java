@@ -22,10 +22,5 @@ public class Hotel {
     private String email;
 
     @Column(name = "created_at", nullable = false, updatable = false)    // Cannot be NULL in DB and Cannot be modified after creation
-    private LocalDateTime createdAt;
-
-    @PrePersist     // Just before the entity is saved for the first time.
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
+    private LocalDateTime createdAt = LocalDateTime.now();
 }

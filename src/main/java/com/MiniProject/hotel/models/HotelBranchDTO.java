@@ -7,6 +7,7 @@ import java.util.List;
 
 @Data
 public class HotelBranchDTO {
+    private Integer id;
     private String name;
     private String city;
     private String address;

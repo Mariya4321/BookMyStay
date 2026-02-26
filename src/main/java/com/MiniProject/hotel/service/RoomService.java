@@ -21,6 +21,28 @@ public class RoomService {
 
     public String create(RoomDTO roomDTO)
     {
+        if(roomDTO == null){
+            throw new RuntimeException("Room data is required");
+        }
+
+        // Negative value validations
+        if(roomDTO.getPrice() == null || roomDTO.getPrice().doubleValue() <= 0){
+            throw new RuntimeException("Price must be greater than zero");
+        }
+
+        if(roomDTO.getTotalRooms() == null || roomDTO.getTotalRooms() <= 0){
+            throw new RuntimeException("Total rooms must be greater than zero");
+        }
+
+        if(roomDTO.getCapacity() == null || roomDTO.getCapacity() <= 0){
+            throw new RuntimeException("Capacity must be greater than zero");
+        }
+
+        if(roomDTO.getCapacity() > roomDTO.getTotalRooms() * 5){
+            throw new RuntimeException("Capacity is too high for total rooms");
+        }
+
+
         System.out.println(roomDTO);
         Room room = new Room();
 

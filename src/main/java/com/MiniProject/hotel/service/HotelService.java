@@ -45,4 +45,43 @@ public class HotelService {
         }
         return hoteldetails;
     }
+
+    public Hoteldetails getHotelById(Integer id) {
+
+        Hotel hotel = hotelRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Hotel not found"));
+
+        Hoteldetails dto = new Hoteldetails();
+        dto.setName(hotel.getName());
+        dto.setDescription(hotel.getDescription());
+        dto.setEmail(hotel.getEmail());
+        dto.setCreatedAt(hotel.getCreatedAt());
+
+        return dto;
+    }
+
+    public Hoteldetails updateHotel(Integer id, Hoteldetails newHotel) {
+
+        Hotel existing = hotelRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Hotel not found"));
+
+        existing.setName(newHotel.getName());
+        existing.setEmail(newHotel.getEmail());
+        existing.setDescription(newHotel.getDescription());
+
+        Hotel saved = hotelRepo.save(existing);
+
+        Hoteldetails response = new Hoteldetails();
+
+        response.setName(saved.getName());
+        response.setEmail(saved.getEmail());
+        response.setDescription(saved.getDescription());
+        response.setCreatedAt(saved.getCreatedAt());
+
+        return response;
+    }
+
+    public void deleteHotel(Integer id) {
+        hotelRepo.deleteById(id);
+    }
 }

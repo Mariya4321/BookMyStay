@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/hotel")
@@ -20,15 +21,40 @@ public class HotelAPI {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> create(@RequestBody Hoteldetails hoteldetails)
+    public ResponseEntity<Map<String, String>> create(@RequestBody Hoteldetails hoteldetails)
     {
         String response = hotelService.create(hoteldetails);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(
+                Map.of("message", "Hotel Created Successfully")
+        );
     }
 
     @GetMapping("/get")
-    public ResponseEntity<List<Hoteldetails>> get()
-    {
-        return new ResponseEntity<>(hotelService.getHotels(), HttpStatus.OK);
+    public ResponseEntity<List<Hoteldetails>> get() {
+        return ResponseEntity.ok(hotelService.getHotels());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Hoteldetails> getById(@PathVariable Integer id) {
+        return ResponseEntity.ok(hotelService.getHotelById(id));
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Hoteldetails> updateHotel(
+            @PathVariable Integer id,
+            @RequestBody Hoteldetails hoteldetails) {
+
+        return ResponseEntity.ok(hotelService.updateHotel(id, hoteldetails));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Map<String,String>> deleteHotel(@PathVariable Integer id) {
+
+        hotelService.deleteHotel(id);
+
+        return ResponseEntity.ok(
+                Map.of("message","Hotel Deleted Successfully")
+        );
+    }
+
 }

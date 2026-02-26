@@ -23,6 +23,14 @@ public class BranchService {
     public String create(HotelBranchDTO hotelBranchDTO)
     {
         System.out.println(hotelBranchDTO);
+
+        if (hotelBranchDTO.getHotelId() == null) {
+            throw new RuntimeException("Hotel Id is required");
+        }
+
+        Hotel hotel = hotelRepo.findById(hotelBranchDTO.getHotelId())
+                .orElseThrow(() -> new RuntimeException("Hotel not found"));
+
         HotelBranch hotelBranch = new HotelBranch();
         hotelBranch.setName(hotelBranchDTO.getName());
         hotelBranch.setCity(hotelBranchDTO.getCity());
@@ -32,14 +40,12 @@ public class BranchService {
         hotelBranch.setImageUrl(hotelBranchDTO.getImageUrl());
         hotelBranch.setRating(hotelBranchDTO.getRating());
 
-        Hotel hotel = hotelRepo.findById(hotelBranchDTO.getHotelId())   // find id in repo
-                .orElseThrow(() -> new RuntimeException("Hotel not found"));    // exceptional handling
-
         hotelBranch.setHotel(hotel);
-        branchRepo.save(hotelBranch);
-        return "Branch created";
-    }
 
+        branchRepo.save(hotelBranch);
+
+        return "Branch created successfully";
+    }
     public List<HotelBranchDTO> getBranch()
     {
         List<HotelBranch> branchList = branchRepo.findAll();

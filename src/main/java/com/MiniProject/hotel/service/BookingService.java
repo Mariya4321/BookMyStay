@@ -33,14 +33,30 @@ public class BookingService {
     {
         System.out.println(bookingRequestDTO);
         Booking booking = new Booking();
-
+        if(bookingRequestDTO == null){
+            throw new RuntimeException("Booking request cannot be null");
+        }
+        User user = userRepo.findById(bookingRequestDTO.getUserId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        booking.setUser(user);
         Room room = roomRepo.findById(bookingRequestDTO.getRoomId())
                 .orElseThrow(() -> new RuntimeException("Room not found"));
         booking.setRoom(room);
 
-        User user = userRepo.findById(bookingRequestDTO.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        booking.setUser(user);
+        if(room.getAvailableRooms() <= 0){
+            throw new RuntimeException("Room is not available");
+        }
+
+        boolean alreadyBooked = bookingRepo.existsByUserIdAndRoomIdAndStatus(
+                user.getId(),
+                room.getId(),
+                BookingStatus.CONFIRMED
+        );
+
+        if(alreadyBooked){
+            throw new RuntimeException("You already have an active booking for this room");
+        }
+
 
         long days = ChronoUnit.DAYS.between(bookingRequestDTO.getCheckIn(), bookingRequestDTO.getCheckOut());
         if (days <= 0) {
@@ -59,27 +75,74 @@ public class BookingService {
 
     public List<BookingResponseDTO> getBooking()
     {
-        List<Booking> bookingList = bookingRepo.findAll();
-        List<BookingResponseDTO> bookingResponseDTO = new ArrayList<>();
+        return bookingRepo.findAll()
+                .stream()
+                .map(booking -> {
+
+                    BookingResponseDTO dto = new BookingResponseDTO();
+
+                    dto.setBookingId(booking.getId());
+                    dto.setRoomId(booking.getRoom().getId());
+                    dto.setUserId(booking.getUser().getId());
+                    dto.setRoomType(booking.getRoom().getRoomType().toString());
+                    dto.setRoomPrice(booking.getRoom().getPrice().floatValue());
+
+                    dto.setUserName(
+                            booking.getUser().getFname() + " " +
+                                    booking.getUser().getLname()
+                    );
+
+                    dto.setCheckIn(booking.getCheckIn());
+                    dto.setCheckOut(booking.getCheckOut());
+                    dto.setTotalPrice(booking.getTotalPrice());
+                    dto.setStatus(booking.getStatus().toString());
+
+                    return dto;
+                })
+                .toList();
+    }
+
+    public List<BookingResponseDTO> getBookingByUser(Integer userId)
+    {
+        List<Booking> bookingList = bookingRepo.findByUserId(userId);
+
+        List<BookingResponseDTO> responseList = new ArrayList<>();
 
         for(Booking booking : bookingList)
         {
-            BookingResponseDTO bookingResponseDTO1 = new BookingResponseDTO();
-            bookingResponseDTO1.setBookingId(booking.getId());
-            bookingResponseDTO1.setRoomId(booking.getRoom().getId());
-            bookingResponseDTO1.setUserId(booking.getUser().getId());
-            bookingResponseDTO1.setRoomType(booking.getRoom().getRoomType().toString());
-            bookingResponseDTO1.setRoomPrice(booking.getRoom().getPrice().floatValue());
-            bookingResponseDTO1.setUserName(booking.getUser().getFname()+" "+booking.getUser().getLname());
-            bookingResponseDTO1.setCheckIn(booking.getCheckIn());
-            bookingResponseDTO1.setCheckOut(booking.getCheckOut());
-            bookingResponseDTO1.setTotalPrice(booking.getTotalPrice());
-            bookingResponseDTO1.setStatus(booking.getStatus().toString());
-            bookingResponseDTO1.setCreatedAt(booking.getCreatedAt());
+            BookingResponseDTO dto = new BookingResponseDTO();
 
-            bookingResponseDTO.add(bookingResponseDTO1);
+            dto.setBookingId(booking.getId());
+            dto.setRoomId(booking.getRoom().getId());
+            dto.setUserId(booking.getUser().getId());
+            dto.setRoomType(booking.getRoom().getRoomType().toString());
+            dto.setRoomPrice(booking.getRoom().getPrice().floatValue());
+            dto.setUserName(
+                    booking.getUser().getFname() + " " +
+                            booking.getUser().getLname()
+            );
+            dto.setCheckIn(booking.getCheckIn());
+            dto.setCheckOut(booking.getCheckOut());
+            dto.setTotalPrice(booking.getTotalPrice());
+            dto.setStatus(booking.getStatus().toString());
+
+            responseList.add(dto);
         }
-        return bookingResponseDTO;
+
+        return responseList;
+    }
+    public void cancelBooking(Integer id) {
+
+        Booking booking = bookingRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Booking not found"));
+
+        if (booking.getStatus() != BookingStatus.CONFIRMED) {
+            throw new RuntimeException("Only booked reservations can be cancelled");
+        }
+
+        booking.setStatus(BookingStatus.CANCELLED);
+
+        bookingRepo.save(booking);
     }
 
 }

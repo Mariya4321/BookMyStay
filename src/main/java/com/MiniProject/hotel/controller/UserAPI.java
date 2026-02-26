@@ -1,5 +1,6 @@
 package com.MiniProject.hotel.controller;
 
+import com.MiniProject.hotel.models.LoginResponseDTO;
 import com.MiniProject.hotel.models.UserDTO;
 import com.MiniProject.hotel.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -23,14 +24,23 @@ public class UserAPI {
         return ResponseEntity.ok(response);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody UserDTO userDTO) {
+
+        UserDTO user = userService.login(userDTO);
+
+        if (user != null) {
+            return ResponseEntity.ok(user);
+        }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body("Invalid email or password");
+    }
+
     @GetMapping("/get")
     public ResponseEntity<List<UserDTO>> get()
     {
         return new ResponseEntity<>(userService.getUser(), HttpStatus.OK);
     }
 
-    @PostMapping("/admin")
-    public ResponseEntity<String> createAdmin(@RequestBody UserDTO userDTO) {
-        return ResponseEntity.ok(userService.createAdmin(userDTO));
-    }
 }

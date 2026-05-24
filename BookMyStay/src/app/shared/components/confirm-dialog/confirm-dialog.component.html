@@ -1,0 +1,9 @@
+<div role="dialog" aria-modal="true">
+  <h2>Confirm</h2>
+  <p>{{ message }}</p>
+  <div>
+    <button type="button" (click)="cancel.emit()">Cancel</button>
+    <button type="button" (click)="confirm.emit()">Confirm</button>
+  </div>
+</div>
+

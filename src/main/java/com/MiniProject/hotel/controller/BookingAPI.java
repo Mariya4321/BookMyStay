@@ -3,7 +3,6 @@ package com.MiniProject.hotel.controller;
 import com.MiniProject.hotel.models.BookingRequestDTO;
 import com.MiniProject.hotel.models.BookingResponseDTO;
 import com.MiniProject.hotel.service.BookingService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

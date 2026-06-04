@@ -2,6 +2,15 @@
 
 A full-stack hotel booking application built using Java Spring Boot, Angular 19, and PostgreSQL.
 
+Project Status
+
+Currently in development
+
+Backend development completed
+REST APIs implemented and tested
+Database integration completed using PostgreSQL and Spring Data JPA
+Angular frontend currently under development
+
 ## Features
 
 - Hotel search and booking management
@@ -34,8 +43,8 @@ A full-stack hotel booking application built using Java Spring Boot, Angular 19,
 
 ## Project Structure
 
-backend/
-frontend/
+BookMyStay(backend)/
+BookMyStay(frontend)/
 
 ## Installation
 

@@ -1,8 +1,21 @@
-<header>
-  <nav>
-    <a routerLink="/">BookMyStay</a>
-    <span style="flex: 1 1 auto"></span>
-    <a routerLink="/auth/login">Login</a>
+<header class="site-header">
+  <nav class="navbar" aria-label="Primary navigation">
+    <a class="navbar-brand" routerLink="/">
+      <span>BookMyStay</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a routerLink="/" fragment="home">Home</a></li>
+      <li><a routerLink="/" fragment="hotels">Hotels</a></li>
+      <li><a routerLink="/" fragment="facilities">Facilities</a></li>
+      <li><a routerLink="/" fragment="contact">Contact Us</a></li>
+      <li><a routerLink="/" fragment="about">About Us</a></li>
+    </ul>
+
+    <div class="auth-buttons">
+      <a class="login-btn" routerLink="/auth/login">Login</a>
+      <a class="register-btn" routerLink="/auth/register">Register</a>
+    </div>
   </nav>
 </header>
 

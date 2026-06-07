@@ -1,3 +1,115 @@
-<h1>BookMyStay</h1>
-<p>Landing page</p>
+<div class="landing-container">
+  <app-header></app-header>
 
+  <!-- Hero Section -->
+  <section class="hero-section" id="home">
+    <div class="hero-background">
+      <img src="https://akm-img-a-in.tosshub.com/businesstoday/images/story/202510/68e0a971676cb-the-new-silk-sheets-whats-fueling-indias-luxury-hotel-boom-045818938-16x9.jpg" alt="Hotel Pool with City View">
+    </div>
+  </section>
+
+  <!-- Hotels Section with Filters -->
+  <section class="hotels-section" id="hotels">
+    <div class="hotels-container">
+      <h2>Find Your Perfect Hotel</h2>
+
+      <!-- Filter Panel -->
+      <div class="filter-panel">
+        <div class="filter-group">
+          <label>State</label>
+          <select [(ngModel)]="selectedState" (change)="onStateChange()" name="state">
+            <option value="">All States</option>
+            <option *ngFor="let state of states" [value]="state">{{ state }}</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label>City</label>
+          <select [(ngModel)]="selectedCity" (change)="onCityChange()" name="city">
+            <option value="">All Cities</option>
+            <option *ngFor="let city of availableCities" [value]="city">{{ city }}</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label>Star Rating</label>
+          <select [(ngModel)]="selectedStars" (change)="onStarsChange()" name="stars">
+            <option value="0">All Ratings</option>
+            <option *ngFor="let star of starOptions" [value]="star">{{ star }}+ Star</option>
+          </select>
+        </div>
+
+        <div class="filter-group preferences-group">
+          <label>Preferences</label>
+          <div class="preferences-list">
+            <button
+              *ngFor="let pref of preferenceOptions"
+              type="button"
+              class="preference-btn"
+              [class.active]="preferences.includes(pref)"
+              (click)="togglePreference(pref)">
+              {{ pref }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hotel Results Count -->
+      <div class="results-count">
+        <p>Showing {{ filteredHotels.length }} hotel{{ filteredHotels.length !== 1 ? 's' : '' }}</p>
+      </div>
+
+      <!-- Hotels Grid -->
+      <div class="hotels-grid">
+        <ng-container *ngIf="filteredHotels.length > 0; else noResults">
+          <div class="hotel-card" *ngFor="let hotel of filteredHotels">
+            <div class="hotel-image">
+              <img [src]="hotel.image" [alt]="hotel.name">
+              <div class="hotel-stars">
+                <span *ngFor="let i of [1,2,3,4,5]" class="star" [class.filled]="i <= hotel.stars">&#9733;</span>
+              </div>
+            </div>
+
+            <div class="hotel-content">
+              <h3>{{ hotel.name }}</h3>
+              <p class="hotel-city">Location: {{ hotel.city }}</p>
+
+              <div class="hotel-amenities">
+                <span *ngFor="let amenity of hotel.amenities | slice:0:3" class="amenity-tag">
+                  {{ amenity }}
+                </span>
+                <span *ngIf="hotel.amenities.length > 3" class="amenity-tag more">
+                  +{{ hotel.amenities.length - 3 }} more
+                </span>
+              </div>
+
+              <div class="hotel-rating">
+                <div class="rating">
+                  <span class="rating-score">{{ hotel.rating }}</span>
+                  <span class="rating-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                </div>
+                <span class="review-count">({{ hotel.reviews }} reviews)</span>
+              </div>
+
+              <div class="hotel-footer">
+                <div class="hotel-price">
+                  <span class="price">${{ hotel.price }}</span>
+                  <span class="per-night">/night</span>
+                </div>
+                <button class="view-btn" (click)="viewHotelDetails(hotel.id)">View Details</button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-template #noResults>
+          <div class="no-results">
+            <p>No hotels found matching your filters. Try adjusting your preferences.</p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </section>
+
+  <app-footer></app-footer>
+</div>

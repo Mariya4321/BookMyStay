@@ -37,8 +37,8 @@ export class LandingComponent {
   selectedCity: string = '';
   selectedStars: number = 0;
   preferences: string[] = [];
-  states: string[] = ['New York', 'California', 'Illinois', 'Texas', 'Florida', 'Dubai', 'Singapore'];
-  cities: string[] = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Miami', 'Dubai', 'Singapore'];
+  states: string[] = ['Maharashtra', 'Karnataka', 'Rajasthan', 'Kerala', 'Gujarat', 'Assam', 'Madhya Pradesh', 'Delhi', 'Tamil Nadu', 'Bihar', 'Kashmir'];
+  cities: string[] = ['Mumbai', 'Bangalore', 'Jaipur', 'Trivandrum', 'Ahmedabad', 'Guwahati', 'Kochi', 'Indore', 'Delhi', 'Chennai', 'Patna', 'Srinagar'];
   starOptions: number[] = [3, 4, 5, 6, 7];
   preferenceOptions: string[] = ['Free WiFi', 'Pool', 'Gym', 'Restaurant', 'Parking', 'Spa', 'Business Center', 'Balcony'];
 
@@ -47,11 +47,11 @@ export class LandingComponent {
     {
       id: 1,
       name: 'Luxury Plaza Hotel',
-      state: 'New York',
-      city: 'New York',
+      state: 'Maharashtra',
+      city: 'Mumbai',
       stars: 5,
       price: 250,
-      image: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&h=300&fit=crop',
+      image: 'https://www.dellaresorts.com/new-images/camp-della-exterior-7-new-jan-9.webp',
       amenities: ['Free WiFi', 'Pool', 'Gym', 'Restaurant', 'Spa'],
       rating: 4.8,
       reviews: 324
@@ -59,11 +59,11 @@ export class LandingComponent {
     {
       id: 2,
       name: 'Downtown Business Hotel',
-      state: 'Illinois',
-      city: 'Chicago',
+      state: 'Karnataka',
+      city: 'Bangalore',
       stars: 4,
       price: 150,
-      image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop',
+      image: 'https://images.trvl-media.com/lodging/24000000/23280000/23272000/23271987/3bc45b7a.jpg?impolicy=resizecrop&rw=1200&ra=fit',
       amenities: ['Free WiFi', 'Business Center', 'Gym', 'Parking'],
       rating: 4.6,
       reviews: 218
@@ -71,11 +71,11 @@ export class LandingComponent {
     {
       id: 3,
       name: 'Tropical Paradise Resort',
-      state: 'Florida',
-      city: 'Miami',
+      state: 'Tamil Nadu',
+      city: 'Chennai',
       stars: 5,
       price: 280,
-      image: 'https://images.unsplash.com/photo-1561501900-d3fee53d55364e2b5ad0d180e0ae2e25c51eebed?w=400&h=300&fit=crop',
+      image: 'https://www.trulyclassy.com/wp-content/uploads/2023/02/k1.jpg',
       amenities: ['Pool', 'Beach Access', 'Spa', 'Restaurant', 'Water Sports'],
       rating: 4.9,
       reviews: 456
@@ -83,11 +83,11 @@ export class LandingComponent {
     {
       id: 4,
       name: 'Modern Stay LA',
-      state: 'California',
-      city: 'Los Angeles',
+      state: 'Kashmir',
+      city: 'Srinagar',
       stars: 4,
       price: 180,
-      image: 'https://images.unsplash.com/photo-1618191407832-4e10b75ffb51?w=400&h=300&fit=crop',
+      image: 'https://images.trvl-media.com/lodging/2000000/1460000/1457900/1457890/61bb88d3.jpg?impolicy=fcrop&w=1200&h=800&quality=medium',
       amenities: ['Free WiFi', 'Gym', 'Parking', 'Balcony'],
       rating: 4.5,
       reviews: 187
@@ -95,11 +95,11 @@ export class LandingComponent {
     {
       id: 5,
       name: 'Heritage Palace',
-      state: 'Dubai',
-      city: 'Dubai',
+      state: 'Rajasthan',
+      city: 'Jaipur',
       stars: 7,
       price: 400,
-      image: 'https://images.unsplash.com/photo-1544456723-318236b1c5b4?w=400&h=300&fit=crop',
+      image: 'https://images.trvl-media.com/lodging/16000000/15690000/15685200/15685196/9b148651.jpg?impolicy=resizecrop&rw=1200&ra=fit',
       amenities: ['Pool', 'Spa', 'Fine Dining', 'Concierge', 'Valet Parking'],
       rating: 4.9,
       reviews: 892
@@ -107,11 +107,11 @@ export class LandingComponent {
     {
       id: 6,
       name: 'Budget Comfort Inn',
-      state: 'Texas',
-      city: 'Houston',
+      state: 'Bihar',
+      city: 'Patna',
       stars: 3,
       price: 80,
-      image: 'https://images.unsplash.com/photo-1559599810-46d1c52494ee?w=400&h=300&fit=crop',
+      image: 'https://www.dellaresorts.com/new-images/enclave-ex-new-2-feb-1.webp',
       amenities: ['Free WiFi', 'Parking'],
       rating: 4.2,
       reviews: 145
@@ -119,11 +119,11 @@ export class LandingComponent {
     {
       id: 7,
       name: 'Elegant City Center',
-      state: 'New York',
-      city: 'New York',
+      state: 'Maharashtra',
+      city: 'Mumbai',
       stars: 5,
       price: 320,
-      image: 'https://images.unsplash.com/photo-1520142536410-7705cfdc7fb5?w=400&h=300&fit=crop',
+      image: 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/554411320.jpg?k=094f6903b9a49790464b5244eb71da33076ef1ac1660f5a70e14f8fe1a1cfdd5&o=',
       amenities: ['Restaurant', 'Gym', 'Business Center', 'Spa', 'Balcony'],
       rating: 4.7,
       reviews: 567
@@ -131,11 +131,11 @@ export class LandingComponent {
     {
       id: 8,
       name: 'Sunset Beach Resort',
-      state: 'Florida',
-      city: 'Miami',
+      state: 'Tamil Nadu',
+      city: 'Chennai',
       stars: 6,
       price: 350,
-      image: 'https://images.unsplash.com/photo-1570129477492-45c003cdd72f?w=400&h=300&fit=crop',
+      image: 'https://images.trvl-media.com/lodging/118000000/117810000/117808800/117808728/a730fb7c.jpg?impolicy=resizecrop&rw=1200&ra=fit',
       amenities: ['Pool', 'Beach Access', 'Restaurant', 'Gym', 'Water Sports'],
       rating: 4.8,
       reviews: 612

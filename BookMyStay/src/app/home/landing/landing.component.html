@@ -6,13 +6,12 @@
     <div class="hero-background">
       <img src="https://akm-img-a-in.tosshub.com/businesstoday/images/story/202510/68e0a971676cb-the-new-silk-sheets-whats-fueling-indias-luxury-hotel-boom-045818938-16x9.jpg" alt="Hotel Pool with City View">
     </div>
+    <h2>Find Your Perfect Hotel</h2>
   </section>
 
   <!-- Hotels Section with Filters -->
   <section class="hotels-section" id="hotels">
-    <div class="hotels-container">
-      <h2>Find Your Perfect Hotel</h2>
-
+    <div class="filters-container">
       <!-- Filter Panel -->
       <div class="filter-panel">
         <div class="filter-group">
@@ -53,12 +52,13 @@
           </div>
         </div>
       </div>
+        <!-- Hotel Results Count -->
+        <div class="results-count">
+            <p>Showing {{ filteredHotels.length }} hotel{{ filteredHotels.length !== 1 ? 's' : '' }}</p>
+        </div>
+    </div>    
 
-      <!-- Hotel Results Count -->
-      <div class="results-count">
-        <p>Showing {{ filteredHotels.length }} hotel{{ filteredHotels.length !== 1 ? 's' : '' }}</p>
-      </div>
-
+    <div class="hotels-container">
       <!-- Hotels Grid -->
       <div class="hotels-grid">
         <ng-container *ngIf="filteredHotels.length > 0; else noResults">

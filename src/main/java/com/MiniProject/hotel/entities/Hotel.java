@@ -20,6 +20,8 @@ public class Hotel {
     private String description;
     @Column(name = "email")
     private String email;
+    @Column(name = "image_url")
+    private String imageUrl;
 
     @Column(name = "created_at", nullable = false, updatable = false)    // Cannot be NULL in DB and Cannot be modified after creation
     private LocalDateTime createdAt = LocalDateTime.now();

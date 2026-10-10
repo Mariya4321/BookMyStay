@@ -1,0 +1,56 @@
+<main class="hotel-rooms">
+  <a class="back-link" routerLink="/customer/browse-hotels">Back to hotels</a>
+  <header>
+    <p class="eyebrow">Available accommodation</p>
+    <h1>Rooms</h1>
+    @if (hotelId() !== null) {
+      <p class="intro">Hotel #{{ hotelId() }} · Explore room types, rates, and availability.</p>
+    }
+  </header>
+
+  @if (loading()) {
+    <p class="status" role="status" aria-live="polite">Loading rooms…</p>
+  } @else if (errorMessage()) {
+    <div class="error-state" role="alert">
+      <p>{{ errorMessage() }}</p>
+      <button type="button" (click)="loadRooms()">Try again</button>
+    </div>
+  } @else if (invalidHotelId() || rooms().length === 0) {
+    <section class="empty-state" aria-labelledby="empty-heading">
+      <h2 id="empty-heading">{{ invalidHotelId() ? 'Hotel unavailable' : 'No rooms listed yet' }}</h2>
+      <p>
+        {{ invalidHotelId()
+          ? 'The hotel link is invalid.'
+          : 'There are no rooms associated with this hotel yet.' }}
+      </p>
+      <a class="action-link" routerLink="/customer/browse-hotels">Browse hotels</a>
+    </section>
+  } @else {
+    <section class="room-results" aria-labelledby="room-results-heading">
+      <h2 id="room-results-heading">Room options <span>({{ rooms().length }})</span></h2>
+      <ul class="room-list">
+        @for (room of rooms(); track room.id) {
+          <li>
+            <article class="room-card">
+              <div class="room-heading">
+                <h3>{{ room.roomType }}</h3>
+                <span class="room-status" [class.unavailable]="!room.isActive || room.availableRooms === 0">
+                  @if (room.isActive && room.availableRooms > 0) {
+                    Available
+                  } @else {
+                    Unavailable
+                  }
+                </span>
+              </div>
+              <p class="price">{{ room.price | currency }}</p>
+              @if (room.capacity !== null) {
+                <p>Capacity: {{ room.capacity }}</p>
+              }
+              <p>Rooms available: {{ room.availableRooms }} of {{ room.totalRooms }}</p>
+            </article>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+</main>

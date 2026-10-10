@@ -29,4 +29,10 @@ public class RoomAPI {
     {
         return new ResponseEntity<>(roomService.getRoom(), HttpStatus.OK);
     }
+
+    @GetMapping("/hotel/{hotelId}")
+    public ResponseEntity<List<RoomDTO>> getByHotel(@PathVariable Integer hotelId)
+    {
+        return new ResponseEntity<>(roomService.getRoomsByHotel(hotelId), HttpStatus.OK);
+    }
 }

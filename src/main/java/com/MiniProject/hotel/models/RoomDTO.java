@@ -15,5 +15,5 @@ public class RoomDTO {
     private Integer capacity;
     private String imageUrl;
     private Boolean isActive;
-    private Integer branchId;
+    private Integer hotelId;
 }

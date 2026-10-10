@@ -7,7 +7,6 @@ import { BookingCreateComponent } from './bookings/booking-create/booking-create
 import { BookingHistoryComponent } from './bookings/booking-history/booking-history.component';
 import { BookingCancelComponent } from './bookings/booking-cancel/booking-cancel.component';
 import { ProfileComponent } from './profile/profile.component';
-import { BrowseHotelsComponent } from './browse-hotels/browse-hotels.component';
 
 @NgModule({
   imports: [
@@ -18,8 +17,7 @@ import { BrowseHotelsComponent } from './browse-hotels/browse-hotels.component';
     BookingCreateComponent,
     BookingHistoryComponent,
     BookingCancelComponent,
-    ProfileComponent,
-    BrowseHotelsComponent
+    ProfileComponent
   ]
 })
 export class CustomerModule {}

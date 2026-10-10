@@ -33,6 +33,6 @@ public class Room {
     private Boolean isActive = true;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "branch_id", referencedColumnName = "id", nullable = false)
-    private HotelBranch branch;
+    @JoinColumn(name = "hotel_id", referencedColumnName = "id", nullable = false)
+    private Hotel hotel;
 }

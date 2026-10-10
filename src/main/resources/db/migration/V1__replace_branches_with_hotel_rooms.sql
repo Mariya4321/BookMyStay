@@ -1,0 +1,15 @@
+BEGIN;
+
+TRUNCATE TABLE booking, room, branch RESTART IDENTITY;
+DROP TABLE branch CASCADE;
+
+ALTER TABLE room DROP COLUMN IF EXISTS branch_id;
+ALTER TABLE room DROP COLUMN IF EXISTS hotel_id;
+ALTER TABLE room ADD COLUMN hotel_id INTEGER NOT NULL;
+ALTER TABLE room
+    ADD CONSTRAINT fk_room_hotel
+    FOREIGN KEY (hotel_id) REFERENCES hotel(id);
+
+DROP SEQUENCE IF EXISTS seq_id_branch;
+
+COMMIT;

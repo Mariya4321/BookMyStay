@@ -9,8 +9,6 @@ import { HotelDeleteComponent } from './hotel-management/hotel-delete/hotel-dele
 import { RoomListComponent } from './room-management/room-list/room-list.component';
 import { RoomDetailComponent } from './room-management/room-detail/room-detail.component';
 import { RoomFormComponent } from './room-management/room-form/room-form.component';
-import { BranchListComponent } from './branch-management/branch-list/branch-list.component';
-import { BranchFormComponent } from './branch-management/branch-form/branch-form.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
@@ -25,8 +23,6 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     RoomListComponent,
     RoomDetailComponent,
     RoomFormComponent,
-    BranchListComponent,
-    BranchFormComponent,
     SidebarComponent
   ]
 })

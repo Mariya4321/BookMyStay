@@ -1,0 +1,49 @@
+<main class="hotel-details">
+  <a class="back-link" routerLink="/customer/browse-hotels">Back to hotels</a>
+
+  @if (loading()) {
+    <p class="status" role="status" aria-live="polite">Loading hotel details…</p>
+  } @else if (errorMessage()) {
+    <div class="error-state" role="alert">
+      <p>{{ errorMessage() }}</p>
+      <button type="button" (click)="loadHotel()">Try again</button>
+    </div>
+  } @else if (invalidId() || !hotel()) {
+    <section class="empty-state" aria-labelledby="empty-heading">
+      <h1 id="empty-heading">Hotel details unavailable</h1>
+      <p>The hotel could not be found. Check the link or browse the available hotels.</p>
+      <a class="action-link" routerLink="/customer/browse-hotels">Browse hotels</a>
+    </section>
+  } @else {
+    <article class="hotel-card" aria-labelledby="hotel-name">
+      <p class="eyebrow">Hotel details</p>
+      @if (hotel()?.imageUrl; as imageUrl) {
+        <img class="hotel-image" [src]="imageUrl" [alt]="'Photo of ' + hotel()?.name" />
+      }
+      <h1 id="hotel-name">{{ hotel()?.name }}</h1>
+
+      @if (hotel()?.description) {
+        <p class="description">{{ hotel()?.description }}</p>
+      }
+
+      <dl class="hotel-information">
+        @if (hotel()?.email) {
+          <div>
+            <dt>Email</dt>
+            <dd><a [href]="'mailto:' + hotel()?.email">{{ hotel()?.email }}</a></dd>
+          </div>
+        }
+        @if (hotel()?.createdAt) {
+          <div>
+            <dt>Added</dt>
+            <dd><time [attr.datetime]="hotel()?.createdAt">{{ hotel()?.createdAt }}</time></dd>
+          </div>
+        }
+      </dl>
+
+      @if (!hotel()?.description && !hotel()?.email && !hotel()?.createdAt) {
+        <p class="secondary-empty">No additional information is available for this hotel.</p>
+      }
+    </article>
+  }
+</main>

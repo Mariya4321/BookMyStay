@@ -6,7 +6,9 @@ import { BookingCreateComponent } from './bookings/booking-create/booking-create
 import { BookingHistoryComponent } from './bookings/booking-history/booking-history.component';
 import { BookingCancelComponent } from './bookings/booking-cancel/booking-cancel.component';
 import { ProfileComponent } from './profile/profile.component';
-import { BrowseHotelsComponent } from './browse-hotels/browse-hotels.component';
+import { HotelDetailsPageComponent } from '../features/hotels/pages/hotel-details-page.component';
+import { HotelRoomsPageComponent } from '../features/hotels/pages/hotel-rooms-page.component';
+import { HotelSearchPageComponent } from '../features/hotels/pages/hotel-search-page.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
@@ -16,7 +18,9 @@ const routes: Routes = [
   { path: 'bookings/history', component: BookingHistoryComponent },
   { path: 'bookings/cancel', component: BookingCancelComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'browse-hotels', component: BrowseHotelsComponent }
+  { path: 'hotel/:id/rooms', component: HotelRoomsPageComponent },
+  { path: 'hotel/:id', component: HotelDetailsPageComponent },
+  { path: 'browse-hotels', component: HotelSearchPageComponent }
 ];
 
 @NgModule({
